@@ -51,4 +51,7 @@ dependencies {
 
 	// Password SALT+Encryption
 	implementation group: 'commons-codec', name: 'commons-codec', version: '1.9'
+
+	// Field validation
+	compile group: 'org.glassfish.jersey.ext', name: 'jersey-bean-validation', version: '2.6'
 }

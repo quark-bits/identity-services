@@ -8,11 +8,12 @@ import lombok.ToString;
 public enum AuthAppErrorCode {
     UNAUTHORIZED(401, "UnAuthorized"),
 
-    USERNAME_EXISTS(2001,"Username Already exists."),
+    USERNAME_EXISTS(2001,"Username Already Taken."),
     INVALID_EMAIL_ID(2002,"Invalid Email Id."),
     INVALID_EMAIL_DOMAIN(2003,"This Email Domain not allowed."),
     INVALID_CREDENTIALS(2004,"Incorrect UserName or Password."),
-    USER_DOES_NOT_EXIST(2005,"User does not exists.");
+    USER_DOES_NOT_EXIST(2005,"User does not exists."),
+    USER_EMAIL_EXISTS(2006,"This emailId is already registered.");
 
 
     private final int error_code;

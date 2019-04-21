@@ -1,11 +1,10 @@
 package com.identity.auth.business.managers.proxy;
 
-import com.identity.auth.business.resource.User;
 import com.identity.auth.business.managers.UserManager;
 import com.identity.auth.business.managers.impl.DefaultUserManager;
+import com.identity.auth.business.resource.User;
 import com.identity.auth.business.resource.UserCredentials;
-import com.identity.auth.exception.UnAuthorizedException;
-import com.identity.auth.exception.user.UserExistsException;
+import com.identity.auth.exception.user.UserNameExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +22,7 @@ public class UserManagerProxy implements UserManager {
 
 
     @Override
-    public Optional<User> createUser(User user) throws UserExistsException {
+    public Optional<User> createUser(User user) throws UserNameExistsException {
         return userManager.createUser(user);
     }
 
