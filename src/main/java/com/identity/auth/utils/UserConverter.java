@@ -5,7 +5,12 @@ import com.identity.auth.business.resource.impl.DefaultUser;
 import com.identity.auth.persistence.entities.UserEntity;
 
 public class UserConverter {
-
+    /**
+     * Convert User to UserEntity
+     *
+     * @param user
+     * @return
+     */
     public static UserEntity toUserEntity(User user){
         UserEntity userEntity = new UserEntity();
         userEntity.setUserName(user.getUserName());
@@ -16,6 +21,12 @@ public class UserConverter {
         return userEntity;
     }
 
+    /**
+     * Convert UserEntity to User Object
+     *
+     * @param userEntity
+     * @return
+     */
     public static User toUser(UserEntity userEntity){
         DefaultUser user = new DefaultUser();
         user.setId(userEntity.getId());

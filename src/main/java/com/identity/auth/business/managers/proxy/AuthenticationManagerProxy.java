@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * Proxy class to check for permissions
- *
  */
 @Component("authenticationManager")
 public class AuthenticationManagerProxy implements AuthenticationManager {

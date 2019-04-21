@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.identity.auth.business.resource.impl.DefaultUser;
 
 @JsonDeserialize(as = DefaultUser.class)
-public interface User{
+public interface User extends Identifiable{
 
     Long getId();
 

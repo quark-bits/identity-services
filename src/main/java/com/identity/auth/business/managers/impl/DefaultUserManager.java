@@ -41,6 +41,7 @@ public class DefaultUserManager implements UserManager {
             UserCredentials userCredentials = new UserCredentials();
             userCredentials.setUserName(userEntity.get().getUserName());
             userCredentials.setPassword(userEntity.get().getPassword().toCharArray());
+            userCredentials.setId(userEntity.get().getId());
             return Optional.of(userCredentials);
         }
         return Optional.empty();

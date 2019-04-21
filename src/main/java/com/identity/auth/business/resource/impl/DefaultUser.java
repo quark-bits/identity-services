@@ -1,5 +1,6 @@
 package com.identity.auth.business.resource.impl;
 
+import com.identity.auth.business.resource.ResourceType;
 import com.identity.auth.business.resource.User;
 import lombok.Data;
 
@@ -11,4 +12,9 @@ public class DefaultUser implements User {
     private String firstName;
     private String lastName;
     private String email;
+
+    @Override
+    public int getObjectType() {
+        return ResourceType.USER.getType();
+    }
 }
