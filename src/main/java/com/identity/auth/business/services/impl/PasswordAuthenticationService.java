@@ -1,9 +1,11 @@
 package com.identity.auth.business.services.impl;
 
+import com.identity.auth.AuthAppConstants;
 import com.identity.auth.AuthAppErrorCode;
 import com.identity.auth.business.managers.AuthenticationManager;
 import com.identity.auth.business.resource.UserCredentials;
 import com.identity.auth.business.services.AuthenticationService;
+import com.identity.auth.exception.UnAuthorizedException;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.POST;
@@ -29,8 +31,16 @@ public class PasswordAuthenticationService implements AuthenticationService {
     public Response authenticate(UserCredentials userCredentials) {
         Boolean isAuthenticated = authenticationManager.authenticateUser(userCredentials);
         if(isAuthenticated){
-            return Response.ok(true, MediaType.APPLICATION_JSON).build();
+            return Response
+                    .status(Response.Status.OK.getStatusCode())
+                    .entity(AuthAppConstants.SUCCESS)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
         }
-        return Response.status(401, AuthAppErrorCode.INVALID_CREDENTIALS.getError_desc()).build();
+        return Response
+                .status(Response.Status.UNAUTHORIZED.getStatusCode())
+                .entity(AuthAppConstants.FAILURE)
+                .type(MediaType.APPLICATION_JSON)
+                .build();
     }
 }

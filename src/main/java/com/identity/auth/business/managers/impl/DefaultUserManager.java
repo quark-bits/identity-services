@@ -1,8 +1,10 @@
 package com.identity.auth.business.managers.impl;
 
+import com.identity.auth.AuthAppErrorCode;
 import com.identity.auth.business.resource.User;
 import com.identity.auth.business.managers.UserManager;
 import com.identity.auth.business.resource.UserCredentials;
+import com.identity.auth.exception.user.UserExistsException;
 import com.identity.auth.persistence.entities.UserEntity;
 import com.identity.auth.persistence.respositories.UserRepository;
 import com.identity.auth.utils.UserConverter;
@@ -20,7 +22,10 @@ public class DefaultUserManager implements UserManager {
     }
 
     @Override
-    public Optional<User> createUser(User user) {
+    public Optional<User> createUser(User user) throws UserExistsException {
+        if(checkUserExists(user.getUserName())){
+            throw new UserExistsException(AuthAppErrorCode.USERNAME_EXISTS.getError_desc(),true);
+        }
         UserEntity userEntity = UserConverter.toUserEntity(user);
         UserEntity createdUserEntity = userRepository.save(userEntity);
         return Optional.of(UserConverter.toUser(createdUserEntity));
@@ -45,6 +50,15 @@ public class DefaultUserManager implements UserManager {
             return Optional.of(userCredentials);
         }
         return Optional.empty();
+    }
+
+    // Check if User Exists
+    private Boolean checkUserExists(String userName){
+        Optional<User> user = getUser(userName);
+        if(user.isPresent()){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
     }
 
 }
