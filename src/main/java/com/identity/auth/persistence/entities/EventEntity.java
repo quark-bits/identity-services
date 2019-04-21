@@ -1,21 +1,19 @@
 package com.identity.auth.persistence.entities;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "events")
-@Getter
-@Setter
+@Data
 @ToString
+@EqualsAndHashCode(callSuper = true)
 public class EventEntity extends BaseEntity {
-    private Long id;
-    private Long objectId;
-    private int objectType;
+
+    @Embedded
+    private ObjectIDType idType;
+
     private String eventType;
 
     public EventEntity() {

@@ -1,9 +1,6 @@
 package com.identity.auth.persistence.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -13,9 +10,9 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
+@Data
 @ToString
+@EqualsAndHashCode(callSuper = true)
 public class UserEntity extends BaseEntity{
 
     @Basic(optional = false)

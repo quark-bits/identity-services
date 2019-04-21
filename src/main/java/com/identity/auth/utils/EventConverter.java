@@ -2,6 +2,7 @@ package com.identity.auth.utils;
 
 import com.identity.auth.events.Event;
 import com.identity.auth.persistence.entities.EventEntity;
+import com.identity.auth.persistence.entities.ObjectIDType;
 
 public class EventConverter {
 
@@ -12,8 +13,13 @@ public class EventConverter {
      */
     public static EventEntity toEventEntity(Event event){
         EventEntity eventEntity = new EventEntity();
-        eventEntity.setObjectId(event.getObjectId());
-        eventEntity.setObjectType(event.getObjectType());
+
+        // Composite Key
+        ObjectIDType objectIDType = new ObjectIDType();
+        objectIDType.setObjectId(event.getObjectId());
+        objectIDType.setObjectType(event.getObjectType());
+        eventEntity.setIdType(objectIDType);
+
         eventEntity.setEventType(event.getEventType());
         return eventEntity;
     }
