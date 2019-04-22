@@ -5,6 +5,9 @@ import com.identity.auth.events.Observable;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * User Observable Singleton
@@ -13,6 +16,7 @@ public enum UserObservable implements Observable<UserObserver,UserEvent> {
     INSTANCE;
 
     private static Set<UserObserver> userObservers = Collections.synchronizedSet(new HashSet<>());
+    private ExecutorService userExecutorService = Executors.newCachedThreadPool();
 
     /* private Constructor */
     UserObservable() {}
@@ -26,8 +30,10 @@ public enum UserObservable implements Observable<UserObserver,UserEvent> {
     }
 
     public void notifyObservers(UserEvent userEvent){
-        for (UserObserver userObserver: userObservers) {
-            userObserver.update(userEvent);
-        }
+        userExecutorService.submit(() ->{
+            for (UserObserver userObserver: userObservers) {
+                userObserver.update(userEvent);
+            }
+        });
     }
 }
